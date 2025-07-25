@@ -1,0 +1,39 @@
+
+.hero-section {
+  min-height: 70vh;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.7)), url("../img/hero-image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 4rem 1rem;
+}
+
+.search-box input::placeholder {
+  color: #888;
+}
+
+@media (min-width: 768px) {
+  .search-box {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero-section h2 {
+    font-size: 2rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .search-box {
+    flex-direction: column;
+    border-radius: 1rem;
+  }
+
+  .search-box a {
+    width: 100%;
+  }
+}
+

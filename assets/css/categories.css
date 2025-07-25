@@ -1,0 +1,22 @@
+
+.category-box {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.category-box:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: translateY(-5px);
+}
+input::placeholder {
+    color: #aaa;
+}
+

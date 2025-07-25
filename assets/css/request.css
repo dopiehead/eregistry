@@ -1,0 +1,117 @@
+
+.property-card {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.purple-card {
+  background: linear-gradient(135deg, #781f1f, #d00909);
+  color: white;
+}
+
+.dark-card {
+  background: linear-gradient(135deg, #781f1f, #d00909);
+  color: white;
+}
+
+.card-content {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.card-image {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.btn-custom {
+  background-color: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-custom:hover {
+  background-color: rgba(255,255,255,0.3);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-outline-custom {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-right: 10px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline-custom:hover {
+  background-color: white;
+  color: #374151;
+}
+
+.btn-filled-custom {
+  background-color: white;
+  border: 2px solid white;
+  color: #374151;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-filled-custom:hover {
+  background-color: transparent;
+  color: white;
+}
+

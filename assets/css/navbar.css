@@ -1,0 +1,28 @@
+
+.navbar-section {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  font-family: "poppins", sans-serif ;
+}
+
+.navbar-links a:hover,
+.auth-buttons a:hover {
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+}
+
+.navbar-toggler {
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+/* You can add animation or slide-down toggle logic here for mobile nav */
+

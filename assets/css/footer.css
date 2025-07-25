@@ -1,0 +1,121 @@
+.footer-section {
+    background-color: #e2e2e2;
+    padding: 40px 0;
+    border-top: 1px solid #e9ecef;
+}
+
+.about-section h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.about-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.learn-more-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.learn-more-btn:hover {
+    background-color: #222;
+    color: white;
+    text-decoration: none;
+}
+
+.links-section h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links-list li {
+    margin-bottom: 8px;
+}
+
+.links-list a {
+    color: #666;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.links-list a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+.social-section h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 35px;
+    height: 35px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.social-icon.facebook {
+    background-color: #1877f2;
+}
+
+.social-icon.twitter {
+    background-color: #1da1f2;
+}
+
+.social-icon.instagram {
+    background-color: #e4405f;
+}
+
+.social-icon.linkedin {
+    background-color: #0a66c2;
+}
+
+.social-icon.youtube {
+    background-color: #ff0000;
+}
+
+.social-icon:hover {
+    opacity: 0.8;
+    color: white;
+    text-decoration: none;
+}
+
+.container-custom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
