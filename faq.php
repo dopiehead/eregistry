@@ -8,6 +8,7 @@
 <?php @include 'components/navbar.php' ?>  
 
     <div class='faq-home'>
+
     <div class="faq-container">
         <div class="faq-header">
             <h1 class="faq-title">Frequently asked questions</h1>
@@ -55,7 +56,7 @@ $faqs = [
 <?php foreach ($faqs as $faq): ?>
 <div class="faq-item" data-category="<?= htmlspecialchars($faq['category']) ?>">
     <div class="faq-question">
-        <div class="faq-icon"><?= $faq['icon'] ?></div>
+        <div class="faq-icon"><?=  htmlspecialchars($faq['icon']) ?></div>
         <div class="faq-question-text"><?= htmlspecialchars($faq['question']) ?></div>
         <div class="expand-icon">+</div>
     </div>
@@ -74,5 +75,6 @@ $faqs = [
 </div>
 </div>
     <?php @include 'components/footer.php' ?>
+    <script src='assets/js/faq.js'></script>
 </body>
 </html>

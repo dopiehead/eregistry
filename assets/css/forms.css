@@ -1,0 +1,13 @@
+#submit-note{
+    background-image: linear-gradient(to right, rgb(224, 170, 227),rgb(56, 2, 71));
+    width:100%;
+    padding:10px 18px;
+    color:white;
+    transform:0.3s ease-in-out;
+}
+
+
+#submit-note:hover , #submit-note:focus{
+    background-image: linear-gradient(to right, rgb(56, 2, 71),rgb(224, 170, 227));
+}
+
