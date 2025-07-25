@@ -1,9 +1,10 @@
 
 .navbar-section {
-  position: sticky;
+  position:fixed;
+  width:100%;
   top: 0;
   z-index: 1030;
-  font-family: "poppins", sans-serif ;
+  font-family: poppins !important;
 }
 
 .navbar-links a:hover,

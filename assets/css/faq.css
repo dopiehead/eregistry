@@ -1,0 +1,228 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.faq-home {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #f8fafc;
+    padding: 40px 20px;
+    line-height: 1.6;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 48px 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+.faq-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.faq-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 16px;
+}
+
+.faq-subtitle {
+    color: #6b7280;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.faq-link {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.faq-link:hover {
+    text-decoration: underline;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    padding: 10px 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 24px;
+    background: white;
+    color: #6b7280;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: capitalize;
+}
+
+.filter-tab:hover {
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.filter-tab.active {
+    background: #1f2937;
+    color: white;
+    border-color: #1f2937;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.faq-item {
+    border: 2px solid #f3f4f6;
+    border-radius: 12px;
+    background: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.faq-item:hover {
+    border-color: #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.faq-question {
+    padding: 20px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 16px;
+    user-select: none;
+}
+
+.faq-icon {
+    width: 24px;
+    height: 24px;
+    background: #f3f4f6;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.faq-question-text {
+    flex: 1;
+}
+
+.expand-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    font-weight: 700;
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .expand-icon {
+    transform: rotate(45deg);
+}
+
+.faq-item.active .faq-icon {
+    background: #dbeafe;
+    color: #3b82f6;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #f9fafb;
+}
+
+.faq-answer.active {
+    max-height: 300px;
+    padding: 0 24px 24px 64px;
+}
+
+.faq-answer-text {
+    color: #4b5563;
+    line-height: 1.6;
+    padding-top: 16px;
+}
+
+.faq-link-text {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.faq-link-text:hover {
+    text-decoration: underline;
+}
+
+.chat-button {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background: #1f2937;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .faq-container {
+        padding: 32px 24px;
+        margin: 20px;
+    }
+
+    .faq-title {
+        font-size: 28px;
+    }
+
+    .filter-tabs {
+        gap: 8px;
+    }
+
+    .filter-tab {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .faq-question {
+        padding: 16px 20px;
+    }
+
+    .faq-answer.active {
+        padding: 0 20px 20px 56px;
+    }
+}
