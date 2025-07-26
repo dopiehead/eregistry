@@ -16,3 +16,8 @@
 <script src="assets/js/sweetalert.min.js"></script> 
 <!-- Flickity Scripts -->
 <script src="https://unpkg.com/flickity@2.3.0/dist/flickity.pkgd.min.js"></script>
+
+<!-- scroll btn  -->
+<link rel="stylesheet" href="assets/css/btn_scroll.css">
+<script src="assets/js/scroll.js" type="text/javascript"></script>
+<a class="btn-down" onclick="topFunction()"><i class='fa fa-arrow-up'></i></a>

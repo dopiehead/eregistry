@@ -17,16 +17,15 @@
       <ul class="navbar-nav mx-auto mb-2 mb-md-0 gap-md-4 text-center">
         <?php
         $links = [ 
-          ['link' => 'About us', 'slug' => 'about.php'],
-          ['link' => 'Forms', 'slug' => 'forms.php'],
-          ['link' => 'FAQ', 'slug' => 'faq.php'],
-          ['link' => 'Blog', 'slug' => 'blog.php'],
-          ['link' => 'Contact us', 'slug' => 'contact.php'],
+          ['link' => 'About us', 'slug' => 'about.php', 'class'=>'about'],
+          ['link' => 'FAQ', 'slug' => 'faq.php', 'class'=>'faq'],
+          ['link' => 'Blog', 'slug' => 'blog.php', 'class'=>'blog'],
+          ['link' => 'Contact us', 'slug' => 'contact.php', 'class'=>'contact'],
         ];
 
         foreach ($links as $item) {
           echo '<li class="nav-item">
-                  <a class="nav-link text-dark" href="' . htmlspecialchars($item['slug']) . '">' . htmlspecialchars($item['link']) . '</a>
+                  <a class="nav-link text-dark fs-5' .htmlspecialchars($item['class']).'" href="' . htmlspecialchars($item['slug']) . '">' . htmlspecialchars($item['link']) . '</a>
                 </li>';
         }
         ?>
@@ -34,8 +33,11 @@
 
       <!-- Auth buttons -->
       <div class="d-flex flex-column flex-md-row align-items-center gap-2 text-center">
-        <a class="btn btn-danger rounded-pill px-4 py-1 w-100 w-md-auto" href="#">Get Started</a>
-        <a class="btn btn-outline-danger rounded-pill px-4 py-1 w-100 w-md-auto" href="#">Sign In</a>
+        <?php if($_SESSION['uid']): ?>
+        <a class="btn btn-danger rounded-pill px-4 py-1 w-100 w-md-auto" href="protected/profile.php">Get Started</a>
+        <?php else : ?>
+          <a class="btn btn-danger rounded-pill px-4 py-1 w-100 w-md-auto" href="getstarted.php">Get Started</a>
+        <?php endif ?>  
       </div>
     </div>
   </div>

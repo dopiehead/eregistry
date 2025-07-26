@@ -82,7 +82,7 @@
         <section class="winners-grid">
             <h2 class="winners-title">WINNERS</h2>
             <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="col-md-4">
                     <div class="winner-card d-flex align-items-center">
                         <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><circle fill='%23f59e0b' cx='30' cy='30' r='30'/><circle fill='%23ffffff' cx='30' cy='25' r='10'/><ellipse fill='%23ffffff' cx='30' cy='45' rx='15' ry='8'/></svg>" alt="Winner 1" class="winner-image">
                         <div class="winner-info">
@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="col-md-4">
                     <div class="winner-card d-flex align-items-center">
                         <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><circle fill='%236366f1' cx='30' cy='30' r='30'/><circle fill='%23ffffff' cx='30' cy='25' r='10'/><ellipse fill='%23ffffff' cx='30' cy='45' rx='15' ry='8'/></svg>" alt="Winner 2" class="winner-image">
                         <div class="winner-info">
@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="col-md-4">
                     <div class="winner-card d-flex align-items-center">
                         <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><circle fill='%23059669' cx='30' cy='30' r='30'/><circle fill='%23ffffff' cx='30' cy='25' r='10'/><ellipse fill='%23ffffff' cx='30' cy='45' rx='15' ry='8'/></svg>" alt="Winner 3" class="winner-image">
                         <div class="winner-info">
@@ -112,7 +112,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="col-md-4">
                     <div class="winner-card d-flex align-items-center">
                         <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><circle fill='%23dc2626' cx='30' cy='30' r='30'/><circle fill='%23ffffff' cx='30' cy='25' r='10'/><ellipse fill='%23ffffff' cx='30' cy='45' rx='15' ry='8'/></svg>" alt="Winner 4" class="winner-image">
                         <div class="winner-info">
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="col-md-4 ">
                     <div class="winner-card d-flex align-items-center">
                         <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><circle fill='%23ec4899' cx='30' cy='30' r='30'/><circle fill='%23ffffff' cx='30' cy='25' r='10'/><ellipse fill='%23ffffff' cx='30' cy='45' rx='15' ry='8'/></svg>" alt="Winner 5" class="winner-image">
                         <div class="winner-info">
@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="col-md-4">
                     <div class="winner-card d-flex align-items-center">
                         <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><circle fill='%2384cc16' cx='30' cy='30' r='30'/><circle fill='%23ffffff' cx='30' cy='25' r='10'/><ellipse fill='%23ffffff' cx='30' cy='45' rx='15' ry='8'/></svg>" alt="Winner 6" class="winner-image">
                         <div class="winner-info">
@@ -141,6 +141,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </section>
         

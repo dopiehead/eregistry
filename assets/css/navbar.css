@@ -7,7 +7,7 @@
   font-family: poppins !important;
 }
 
-.navbar-links a:hover,
+.nav-link a:hover,
 .auth-buttons a:hover {
   opacity: 0.85;
   transition: all 0.3s ease;
@@ -21,6 +21,10 @@
 .navbar-toggler {
   outline: none;
   box-shadow: none;
+}
+
+.nav-link{
+  color:rgb(41, 41, 41);
 }
 
 

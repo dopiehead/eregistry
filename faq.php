@@ -1,3 +1,4 @@
+<?php include("engine/checkSession.php") ?>
 <html lang="en">
 <head>
      <?php @include("components/links.php") ?>
@@ -71,7 +72,7 @@ $faqs = [
         </div>
     </div>
 
-    <button class="chat-button" onclick="openChat()">💬</button>
+    <!-- <button class="chat-button" onclick="openChat()">💬</button> -->
 </div>
 </div>
     <?php @include 'components/footer.php' ?>

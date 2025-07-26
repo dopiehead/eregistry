@@ -1,3 +1,4 @@
+<?php include("engine/checkSession.php") ?>
 <html lang="en">
 <head>
 <?php
