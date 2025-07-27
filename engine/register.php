@@ -20,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pin = $input['pin'] ?? '';
     $image = $input['image'] ?? null; // Optional
     $created = date('Y-m-d H:i:s');
+    $verified = 0;
+    $vkey = md5(time() . $email);
 
     if (empty($email) || empty($password)) {
         echo json_encode([
@@ -30,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Attempt registration
-    $registered = $auth->register($name, $email, $password, $image, $bio, $pin, $created);
+    $registered = $auth->register($name, $email, $password, $image, $bio, $pin, $vkey, $verified, $created);
 
     if ($registered) {
         echo json_encode([

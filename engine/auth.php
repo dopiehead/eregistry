@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 session_start();
+
 require_once 'config.php';
 
 class Auth
@@ -22,9 +23,11 @@ class Auth
         string $name,
         string $email,
         string $password,
+        string $vkey, 
         ?string $image = '',
-        string $bio = '',
-        ?string $pin = null,
+        ?string $bio = '',
+        ?string $pin = null,    
+        ?int $verified = 0, 
         string $date_created = ''
     ): bool {
         if (empty($email) || empty($password)) {
@@ -35,6 +38,9 @@ class Auth
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
         $bio = htmlspecialchars($bio, ENT_QUOTES, 'UTF-8');
         $image = $image ?? '';
+        $vkey = md5(time() . $email);
+        $verified = 0;
+        
 
         // Check if email already exists
         $stmt = $this->conn->prepare("SELECT id FROM user_profile WHERE email = ?");
@@ -63,15 +69,15 @@ class Auth
 
         // Prepare insert query
         $stmt = $this->conn->prepare("
-            INSERT INTO user_profile (name, email, password, image, bio, pin, date_created)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO user_profile (name, email, password, image, bio, pin, vkey, verified, date_created)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
 
         if (!$stmt) {
             throw new \RuntimeException("Prepare failed: " . $this->conn->error);
         }
 
-        $stmt->bind_param("sssssis", $name, $email, $hashedPassword, $image, $bio, $pin, $created);
+        $stmt->bind_param("sssssisss", $name, $email, $hashedPassword, $image, $bio, $pin, $vkey, $verified, $created);
         $success = $stmt->execute();
         $stmt->close();
 
