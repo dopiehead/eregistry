@@ -1,8 +1,11 @@
 <?php
-require_once 'engine/auth.php';
+declare(strict_types=1);
 
-$auth = new Auth();
+require_once 'auth.php';
+
+$auth = new Auth(new Database());
+
 $auth->logout();
 
-header('Location: login.php');
+header('Location: ../getstarted.php');
 exit;

@@ -1,6 +1,6 @@
 <?php include("engine/checkSession.php");
 error_reporting(E_ALL ^ E_NOTICE);
-isset($_GET['details']) && !empty($_GET['details']) ? $details = filter_var($_GET['details']) : null;
+isset($_GET['details']) && !empty($_GET['details']) ? $details = filter_var($_GET['details'], FILTER_SANITIZE_STRING) : null;
 ?>
 
 <!DOCTYPE html>
@@ -26,44 +26,53 @@ isset($_GET['details']) && !empty($_GET['details']) ? $details = filter_var($_GE
       <li><a href="#signup-form">Sign Up</a></li>
     </ul>
     <div id="login-form">
+
+
+<!-- log in form -->
       <form id="login">
         <div>
           <label for="login-email">Email</label>
-          <input type="email" id="login-email" placeholder="Enter your email" required>
+          <input type="email" name="login-email" id="login-email" placeholder="Enter your email" required>
         </div>
 
         <div>
           <label for="login-password">Password</label>
-          <input type="password" id="login-password" placeholder="Enter your password" required>
+          <input type="password" name="login-password" id="login-password" placeholder="Enter your password" required>
         </div>
-        <p><a href="forget-password">Forgot password</a></p>
-        <button type="submit">Login</button>
+        <p><a href="forgot-password.php">Forgot password</a></p>
+        <button class='btn-custom' type="submit"><span class='signin-note'></span>Login  <span style='display:none;' class='spinner-border text-light'></span></button>       
       </form>
+     
+      <div class='mt-3 text-danger text-center w-100' id="error-message"></div>
     </div>
+   
+<!-- sign up form -->
+
     <div id="signup-form">
       <form id="signup">
         <div>
           <label for="signup-name">Full Name</label>
-          <input type="text" id="signup-name" placeholder="Enter your full name" required>
+          <input type="text" name="signup-name" id="signup-name" placeholder="Enter your full name" required>
         </div>
 
         <div>
           <label for="signup-email">Email</label>
-          <input type="email" id="signup-email" placeholder="Enter your email" required>
+          <input type="email" name="signup-email" id="signup-email" placeholder="Enter your email" required>
         </div>
 
         <div>
           <label for="signup-password">Password</label>
-          <input type="password" id="signup-password" placeholder="Create a password" required>
+          <input type="password" name="signup-password" id="signup-password" placeholder="Create a password" required>
         </div>
 
         <div>
           <label for="signup-confirm">Confirm Password</label>
-          <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+          <input type="password" name="signup-confirm" id="signup-confirm" placeholder="Confirm your password" required>
         </div>
 
-        <button type="submit">Create Account</button>
+        <button class='btn-custom' type="submit"><span class='signup-note'>Create Account</span> <span style='display:none;' class='spinner-border text-light'></span></button>
       </form>
+      <div class='mt-3 text-danger text-center w-100' id="error-message"></div>
     </div>
   </div>
 </div>
@@ -71,128 +80,9 @@ isset($_GET['details']) && !empty($_GET['details']) ? $details = filter_var($_GE
 
 <input type="text" id="url_details" value="<?= htmlspecialchars($details) ?>">
 
-
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-<script>
-$(function() {
-    // jQuery UI tabs initialization with fade animation
-    $("#auth-tabs").tabs({
-        activate: function(event, ui) {
-            ui.newPanel.hide().fadeIn(300);
-        }
-    });
-    // Handle user type button selection (outside form submission)
-    // $(".btn-outline-secondary").on("click", function(e) {
-    //     e.preventDefault();
-    //     const userType = $(this).attr("id");
-    //     $("#user_type").val(userType);
-    //     $(this).addClass("btn-secondary text-white")
-    //            .siblings().removeClass("btn-secondary text-white");
-    // });
-
-    // LOGIN HANDLER
-    $('#login').on('submit', function(e) {
-        e.preventDefault();
-
-        $(".spinner-border").show();
-        $(".signin-note").hide();
-        $('.btn-custom').prop('disabled', true);
-
-        const email = $("#login-email").val();
-        const password = $("#login-password").val();
-        const url = $("#url_details").val().trim();
-
-        $.ajax({
-            type: "POST",
-            url: "engine/signin-process.php",
-            data: { email, password },
-            dataType: "json",
-            success: function(response) {
-                $(".spinner-border").hide();
-                $(".signin-note").show();
-                $('.btn-custom').prop('disabled', false);
-
-                if (response.status === "success") {
-                    if (url) {
-                        window.location.href = url;
-                    } else {
-                                window.location.href = "protected/dashboard.php";                      
-                    }
-                } else {
-                    $("#error-message").text(response.message);
-                }
-            },
-            error: function() {
-                $(".spinner-border").hide();
-                $(".signin-note").show();
-                $('.btn-custom').prop('disabled', false);
-                $("#error-message").text("Something went wrong. Please try again.");
-            }
-        });
-    });
-
-    // SIGNUP HANDLER
-    $('#signup').on('submit', function(e) {
-        e.preventDefault();
-
-        if ($('#signup-password').val() !== $('#signup-confirm').val()) {
-            alert("Passwords do not match!");
-            return;
-        }
-
-        $(".spinner-border").show();
-        $(".signup-note").hide();
-        $('.btn-custom').prop('disabled', true);
-
-        const formData = {
-            name: $("#signup-name").val(),
-            email: $("#signup-email").val(),
-            password: $("#signup-password").val(),
-            confirm: $("#signup-confirm").val(),
-            user_type: $("#user_type").val() || 'User' // optional fallback
-        };
-
-        $.ajax({
-            type: "POST",
-            url: "engine/signup-process.php",
-            data: formData,
-            dataType: "json",
-            success: function(response) {
-                $(".spinner-border").hide();
-                $(".signup-note").show();
-                $('.btn-custom').prop('disabled', false);
-
-                if (response.status === "success") {
-                    swal({
-                        icon: "success",
-                        title: "Registration Successful",
-                        text: response.message
-                    });
-                    $('#signup')[0].reset();
-                } else {
-                    swal({
-                        icon: "warning",
-                        title: "Registration Failed",
-                        text: response.message
-                    });
-                }
-            },
-            error: function(err) {
-                $(".spinner-border").hide();
-                $(".signup-note").show();
-                $('.btn-custom').prop('disabled', false);
-                swal({
-                    icon: "error",
-                    title: "Registration Failed",
-                    text: err.responseText || "Something went wrong"
-                });
-            }
-        });
-    });
-});
-</script>
-
+<script src='assets/js/getstarted.js'></script>
 
 </body>
 </html>

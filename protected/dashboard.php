@@ -1,7 +1,8 @@
 <?php
+
 require_once '../engine/auth.php';
 
-$auth = new Auth();
+$auth = new Auth( new Database());
 
 if (!$auth->isLoggedIn()) {
     header('Location: ../getstarted.php');
@@ -10,4 +11,4 @@ if (!$auth->isLoggedIn()) {
 ?>
 
 <h2>Welcome, User ID <?= $auth->getUserId(); ?>!</h2>
-<a href="logout.php">Logout</a>
+<a href="../engine/logout.php">Logout</a>
