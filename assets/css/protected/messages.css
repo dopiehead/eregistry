@@ -1,0 +1,9 @@
+.sidebar .messages-active:hover {
+    color: #ffffff;
+    background-color: #4a5568;
+}
+
+.sidebar .messages-active.active {
+    color: #ffffff;
+    background-color: #4a5568;
+}
