@@ -23,7 +23,7 @@ class Auth
         string $name,
         string $email,
         string $password,
-        string $vkey, 
+        ?string $vkey='', 
         ?string $image = '',
         ?string $bio = '',
         ?string $pin = null,    

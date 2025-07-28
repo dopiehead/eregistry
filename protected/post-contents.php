@@ -14,14 +14,13 @@ else{
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-    <title>Messages</title>
-    <?php include("components/links.php") ?>
-    <link rel="stylesheet" href="../assets/css/protected/contents.css">
+     <title>Contents</title>
+     <?php @include("components/links.php") ?>
+     <link rel="stylesheet" href="../assets/css/protected/contents.css">
 
 </head>
 <body>

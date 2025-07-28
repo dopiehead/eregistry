@@ -6,7 +6,7 @@
                 <p style="margin: 0; color: #6b7280; font-size: 14px;">Track team progress here. You almost reach a goal!</p>
             </div>
             <div class="user-profile">
-                <span style="color: #6b7280; font-size: 14px;"><?= htmlspecialchars($date_created) ?></span>
+                <span style="color: #6b7280; font-size: 14px;"><?= htmlspecialchars (date("Y-m-d")) ?></span>
                 <div class="dropdown">
                     <button class="btn" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-calendar"></i>
@@ -22,11 +22,11 @@
                         <i class="fas fa-phone"></i>
                     </a>
                 </div>
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <button class="btn" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-video"></i>
                     </button>
-                </div>
+                </div> -->
                 <div class="dropdown">
                     <button class="btn" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-ellipsis-h"></i>

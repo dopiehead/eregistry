@@ -14,8 +14,10 @@ isset($_GET['details']) && !empty($_GET['details']) ? $details = filter_var($_GE
 </head>
 <body class='bg-light'>
 
-<div class='container px-3 py-2 back-button'>
+<div class='container px-3 py-2 back-button d-flex justify-content-between'>
     <a class='text-white text-decoration-none' onclick="history.go(-1)"><i class='fa fa-arrow-left'></i> Back</a>
+
+    <a class='text-white text-decoration-none' href="index.php">Home <i class='fa fa-arrow-right'></i> </a>
 </div>
 
 <div class='auth-home'>
@@ -30,15 +32,28 @@ isset($_GET['details']) && !empty($_GET['details']) ? $details = filter_var($_GE
 
 <!-- log in form -->
       <form id="login">
-        <div>
-          <label for="login-email">Email</label>
-          <input type="email" name="login-email" id="login-email" placeholder="Enter your email" required>
-        </div>
+      <?php
+$loginFields = [
+    [
+        'label' => 'Email', 'type' => 'email',
+        'name' => 'login-email',  'id' => 'login-email',   'placeholder' => 'Enter your email'
+    ],
+    [
+        'label' => 'Password',  'type' => 'password',   'name' => 'login-password',
+        'id' => 'login-password',  'placeholder' => 'Enter your password'
+    ]
+];
+?>
 
-        <div>
-          <label for="login-password">Password</label>
-          <input type="password" name="login-password" id="login-password" placeholder="Enter your password" required>
-        </div>
+<?php foreach ($loginFields as $field): ?>
+  <div>
+    <label for="<?= htmlspecialchars($field['id']) ?>"><?= htmlspecialchars($field['label']) ?></label>
+    <input type="<?= htmlspecialchars($field['type']) ?>"  name="<?= htmlspecialchars($field['name']) ?>"
+      id="<?= htmlspecialchars($field['id']) ?>"  placeholder="<?= htmlspecialchars($field['placeholder']) ?>" required
+    >
+  </div>
+<?php endforeach; ?>
+
         <p><a href="forgot-password.php">Forgot password</a></p>
         <button class='btn-custom' type="submit"><span class='signin-note'></span>Login  <span style='display:none;' class='spinner-border text-light'></span></button>       
       </form>
@@ -50,25 +65,39 @@ isset($_GET['details']) && !empty($_GET['details']) ? $details = filter_var($_GE
 
     <div id="signup-form">
       <form id="signup">
-        <div>
-          <label for="signup-name">Full Name</label>
-          <input type="text" name="signup-name" id="signup-name" placeholder="Enter your full name" required>
-        </div>
+      <?php
+$fields = [
+    [
+        'label' => 'Full Name', 'type' => 'text',  'name' => 'signup-name',
+        'id' => 'signup-name', 'placeholder' => 'Enter your full name'
+    ],
+    [
+        'label' => 'Email', 'type' => 'email',   'name' => 'signup-email',
+        'id' => 'signup-email', 'placeholder' => 'Enter your email'
+    ],
+    [
+        'label' => 'Password', 'type' => 'password', 'name' => 'signup-password',
+        'id' => 'signup-password','placeholder' => 'Create a password'
+    ],
+    [
+        'label' => 'Confirm Password', 'type' => 'password', 'name' => 'signup-confirm',
+        'id' => 'signup-confirm', 'placeholder' => 'Confirm your password'
+    ],
+];
+?>
 
-        <div>
-          <label for="signup-email">Email</label>
-          <input type="email" name="signup-email" id="signup-email" placeholder="Enter your email" required>
-        </div>
-
-        <div>
-          <label for="signup-password">Password</label>
-          <input type="password" name="signup-password" id="signup-password" placeholder="Create a password" required>
-        </div>
-
-        <div>
-          <label for="signup-confirm">Confirm Password</label>
-          <input type="password" name="signup-confirm" id="signup-confirm" placeholder="Confirm your password" required>
-        </div>
+<?php foreach ($fields as $field): ?>
+  <div>
+    <label for="<?= htmlspecialchars($field['id']) ?>"><?= htmlspecialchars($field['label']) ?></label>
+    <input 
+      type="<?= htmlspecialchars($field['type']) ?>" 
+      name="<?= htmlspecialchars($field['name']) ?>" 
+      id="<?= htmlspecialchars($field['id']) ?>" 
+      placeholder="<?= htmlspecialchars($field['placeholder']) ?>" 
+      required
+    >
+  </div>
+<?php endforeach; ?>
 
         <button class='btn-custom' type="submit"><span class='signup-note'>Create Account</span> <span style='display:none;' class='spinner-border text-light'></span></button>
       </form>
@@ -79,7 +108,7 @@ isset($_GET['details']) && !empty($_GET['details']) ? $details = filter_var($_GE
 </div>
 
 <input type="text" id="url_details" value="<?= htmlspecialchars($details) ?>">
-
+<?php @include 'components/footer.php' ?>  
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script src='assets/js/getstarted.js'></script>

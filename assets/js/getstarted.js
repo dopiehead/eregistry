@@ -85,7 +85,7 @@ $(function() {
 
         $.ajax({
             type: "POST",
-            url: "../../engine/register",
+            url: "engine/register",
             data: JSON.stringify(formData),
             contentType: "application/json", // Important!
             dataType: "json",
