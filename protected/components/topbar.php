@@ -17,11 +17,11 @@
                         <i class="fas fa-phone"></i>
                     </a>
                 </div>
-                <!-- <div class="dropdown">
-                    <button class="btn" type="button" data-bs-toggle="dropdown">
-                        <i class="fas fa-video"></i>
-                    </button>
-                </div> -->
+                <div class="dropdown">
+                    <a class="btn" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i> (<span class='text-danger'>0</span>)
+                    </a>
+                </div> 
                 <div class="dropdown">
                     <button class="btn" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-ellipsis-h"></i>

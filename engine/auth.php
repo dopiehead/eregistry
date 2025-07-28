@@ -1,10 +1,7 @@
 <?php
 declare(strict_types=1);
-
 session_start();
-
 require_once 'config.php';
-
 class Auth
 {
     private \mysqli $conn;
@@ -20,15 +17,10 @@ class Auth
     }
 
     public function register(
-        string $name,
-        string $email,
-        string $password,
-        ?string $vkey='', 
-        ?string $image = '',
-        ?string $bio = '',
-        ?string $pin = null,    
-        ?int $verified = 0, 
-        string $date_created = ''
+        string $name, string $email,
+        string $password, ?string $vkey='', 
+        ?string $image = '', ?string $bio = '',
+        ?string $pin = null, ?int $verified = 0, string $date_created = ''
     ): bool {
         if (empty($email) || empty($password)) {
             return false;
@@ -148,19 +140,11 @@ class Auth
         }
     }
 
-    public function sendMessage(
-    string $sender_email,
-    string $name,
-    string $subject,
-    string $compose,
-    string $receiver_email,
-    int $has_read = 0,
-    int $is_receiver_deleted = 0,
-    int $is_sender_deleted = 0,
-    string $date = ''
+    public function sendMessage(string $sender_email, string $name,
+    string $subject, string $compose, string $receiver_email, int $has_read = 0, int $is_receiver_deleted = 0,
+    int $is_sender_deleted = 0, string $date = ''
     ): bool {
         $date = $date ?: date('Y-m-d H:i:s');
-
         $stmt = $this->conn->prepare("INSERT INTO messages (sender_email, name, subject, compose, receiver_email, has_read, is_receiver_deleted, is_sender_deleted, date)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
@@ -170,16 +154,9 @@ class Auth
         }
     
         $stmt->bind_param(
-            'ssssssiss',
-            $sender_email,
-            $name,
-            $subject,
-            $compose,
-            $receiver_email,
-            $has_read,
-            $is_receiver_deleted,
-            $is_sender_deleted,
-            $date
+            'ssssssiss',  $sender_email,  $name,  $subject,
+            $compose, $receiver_email,  $has_read, $is_receiver_deleted,
+            $is_sender_deleted, $date
         );
     
         $result = $stmt->execute();

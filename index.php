@@ -5,7 +5,7 @@
  @include("components/links.php");
 $links = ['assets/css/hero-section.css','assets/css/categories.css', 'assets/css/navbar.css',
  'assets/css/banner.css', 'assets/css/registries.css', 'assets/css/request.css', 'assets/css/blog-section.css',
-'assets/css/video.css', 'assets/css/groups.css', 'assets/css/pride.css'];
+'assets/css/video.css', 'assets/css/groups.css', 'assets/css/pride.css', 'assets/css/search-result.css'];
 foreach ($links as $link) {
 echo"<link rel='stylesheet' href='{$link}' >";
 }

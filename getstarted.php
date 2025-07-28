@@ -90,10 +90,8 @@ $fields = [
   <div>
     <label for="<?= htmlspecialchars($field['id']) ?>"><?= htmlspecialchars($field['label']) ?></label>
     <input 
-      type="<?= htmlspecialchars($field['type']) ?>" 
-      name="<?= htmlspecialchars($field['name']) ?>" 
-      id="<?= htmlspecialchars($field['id']) ?>" 
-      placeholder="<?= htmlspecialchars($field['placeholder']) ?>" 
+      type="<?= htmlspecialchars($field['type']) ?>"  name="<?= htmlspecialchars($field['name']) ?>" 
+      id="<?= htmlspecialchars($field['id']) ?>"  placeholder="<?= htmlspecialchars($field['placeholder']) ?>" 
       required
     >
   </div>

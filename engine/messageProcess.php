@@ -68,3 +68,5 @@ if ($auth->sendMessage(
         "message" => "Failed to send message."
     ]);
 }
+
+?>
