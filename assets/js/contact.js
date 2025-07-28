@@ -21,6 +21,7 @@ $('#contactForm').on('submit', function(e) {
                 $('#contactForm')[0].reset();
             } else {
                 $('#responseMessage').html(`<div class="alert alert-danger">${response.message}</div>`);
+               
             }
         },
         error: function(xhr, status, error) {

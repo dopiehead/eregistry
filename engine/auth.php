@@ -18,10 +18,15 @@ class Auth
 
     // register user module
     public function register(
-        string $name, string $email,
-        string $password, ?string $vkey='', 
-        ?string $image = '', ?string $bio = '',
-        ?string $pin = null, ?int $verified = 0, string $date_created = ''
+        string $name,
+         string $email,
+        string $password,
+         ?string $vkey='', 
+        ?string $image = '',
+         ?string $bio = '',
+        ?string $pin = null, 
+        ?int $verified = 0, 
+        string $date_created = ''
     ): bool {
         if (empty($email) || empty($password)) {
             return false;
@@ -180,16 +185,32 @@ class Auth
 
 
     // contact processing module
-    public function contactUs( string $name, 
-    string $subject, 
-    string $email, 
-    string $message, 
+    public function contactUs(string $firstname,
+    string $lastname,
+    string $subject,
+    string $email,
+    string $message,
     string $date = '') :bool {   
          $date = $date ?: date('Y-m-d H:i:s');
          $contactProcess = $this->conn->prepare("INSERT INTO contact (firstname, lastname, subject, email, message, date)
          VALUES (?, ?, ?, ?, ?, ?)");
          $contactProcess->bind_param("ssssss",$firstname, $lastname, $subject, $email, $message, $date);
          if($contactProcess->execute()){
+           return true;
+         }
+
+         else{
+            return false;
+         }
+    }
+
+
+    public function subscribe(string $email, string $date = '') :bool{
+        $date = $date ?: date('Y-m-d H:i:s');
+        $subscribeProcess = $this->conn->prepare("INSERT INTO subscription (email,date)
+         VALUES (?, ?)");
+         $subscribeProcess->bind_param("ss",$email, $date);
+         if($subscribeProcess->execute()){
            return true;
          }
 

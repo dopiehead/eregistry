@@ -85,12 +85,12 @@
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-
+                            <span id="responseMessage"></span>
                             <!-- Submit Button -->
                             <button type="submit" class="submit-btn mt-3">
                                 <span class="btn-text">Submit</span>
                             </button>
-                            <div id="responseMessage" class="mt-2"></div>
+                           
                         </form>
                         <br>
                     </div>
