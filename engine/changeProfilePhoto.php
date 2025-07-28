@@ -1,39 +1,33 @@
-
-<?php session_start();
+<?php
+session_start();
+header('Content-Type: application/json');
 
 require_once 'auth.php';
-
 require_once '../vendor/autoload.php';
 
-$auth = new Auth( new Database());
+use Cloudinary\Cloudinary;
 
+$auth = new Auth(new Database());
 if (!$auth->isLoggedIn()) {
-    header('Location: ../getstarted.php');
+    echo json_encode(["success" => false, "message" => "Not authenticated."]);
     exit;
-}
-
-else{
-    include("contents/userDetails.php");
 }
 
 $conn = $auth->getConnection();
 
-use Cloudinary\Cloudinary;
+// Validate session user
+$userId = $_SESSION['u_id'] ?? null;
 
-// Validate session and determine user type
-$userType = null;
-$userId = null;
-$imageColumn = null;
-$table = null;
+if (!$userId) {
+    echo json_encode(["success" => false, "message" => "Invalid session."]);
+    exit;
+}
 
-if (!empty($_SESSION['u_id'])) {
-    $userId = $_SESSION['u_id'];
-    $table = 'user_profile';
-    $imageColumn = 'image';
-    $folder = 'uploads/users/';
-} 
+$table = 'user_profile';
+$imageColumn = 'image';
+$cloudFolder = 'eregistry/users'; // Cloudinary folder
 
-// Cloudinary configuration
+// Cloudinary setup
 try {
     $cloudinary = new Cloudinary([
         'cloud_name' => $_ENV['CLOUDINARY_CLOUD_NAME'],
@@ -42,12 +36,14 @@ try {
         'secure'     => true
     ]);
 } catch (Exception $e) {
-    exit("Cloudinary configuration failed: " . $e->getMessage());
+    echo json_encode(["success" => false, "message" => "Cloudinary config failed: " . $e->getMessage()]);
+    exit;
 }
 
 // Validate uploaded file
 if (!isset($_FILES['fileupload']) || $_FILES['fileupload']['error'] !== UPLOAD_ERR_OK) {
-    exit("No file uploaded or upload error.");
+    echo json_encode(["success" => false, "message" => "No file uploaded or upload error."]);
+    exit;
 }
 
 $file = $_FILES['fileupload'];
@@ -57,44 +53,42 @@ $allowed = ['jpg', 'jpeg', 'png'];
 $maxSize = 4 * 1024 * 1024;
 
 if (!in_array($extension, $allowed)) {
-    exit("Please upload a valid image (JPG, JPEG, PNG).");
+    echo json_encode(["success" => false, "message" => "Invalid file type. Use JPG, JPEG, or PNG."]);
+    exit;
 }
 
 if ($file['size'] > $maxSize) {
-    exit("Image file size exceeds the 4MB limit.");
+    echo json_encode(["success" => false, "message" => "Image exceeds 4MB size limit."]);
+    exit;
 }
 
 // Upload to Cloudinary
 try {
     $upload = $cloudinary->uploadApi()->upload($file['tmp_name'], [
-        'folder' => $folder,
+        'folder' => $cloudFolder,
         'public_id' => 'profile_' . uniqid(),
         'overwrite' => true,
         'resource_type' => 'image'
     ]);
     $imageUrl = $upload['secure_url'] ?? null;
     if (!$imageUrl) {
-        exit("Upload failed. No URL returned.");
+        echo json_encode(["success" => false, "message" => "Image upload failed."]);
+        exit;
     }
 } catch (Exception $e) {
-    exit("Cloudinary upload error: " . $e->getMessage());
+    echo json_encode(["success" => false, "message" => "Upload error: " . $e->getMessage()]);
+    exit;
 }
 
-// Update user record using prepared statement
-$id = $_POST['id'];
 
+// Update DB
 $stmt = $conn->prepare("UPDATE $table SET $imageColumn = ? WHERE id = ?");
-$stmt->bind_param("si", $imageUrl, $id);
+$stmt->bind_param("si", $imageUrl, $userId);
 
 if ($stmt->execute()) {
-    if ($userType === 'buyer') {
-        $_SESSION['image'] = $imageUrl;
-    } else {
-        $_SESSION['business_image'] = $imageUrl;
-    }
-    echo "1";
+    echo json_encode(["success" => true, "message" => "Profile image updated successfully!", "image" => $imageUrl]);
 } else {
-    echo "Error updating profile image.";
+    echo json_encode(["success" => false, "message" => "Failed to update profile image in database."]);
 }
 
 $stmt->close();

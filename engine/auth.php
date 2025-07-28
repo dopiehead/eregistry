@@ -147,6 +147,48 @@ class Auth
             return false;
         }
     }
+
+    public function sendMessage(
+    string $sender_email,
+    string $name,
+    string $subject,
+    string $compose,
+    string $receiver_email,
+    int $has_read = 0,
+    int $is_receiver_deleted = 0,
+    int $is_sender_deleted = 0,
+    string $date = ''
+    ): bool {
+        $date = $date ?: date('Y-m-d H:i:s');
+
+        $stmt = $this->conn->prepare("INSERT INTO messages (sender_email, name, subject, compose, receiver_email, has_read, is_receiver_deleted, is_sender_deleted, date)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+        if (!$stmt) {
+            error_log("Prepare failed: " . $this->conn->error);
+            return false;
+        }
+    
+        $stmt->bind_param(
+            'ssssssiss',
+            $sender_email,
+            $name,
+            $subject,
+            $compose,
+            $receiver_email,
+            $has_read,
+            $is_receiver_deleted,
+            $is_sender_deleted,
+            $date
+        );
+    
+        $result = $stmt->execute();
+        $stmt->close();
+    
+        return $result;
+    }
+
 }
+    
 
 ?>

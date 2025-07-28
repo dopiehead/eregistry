@@ -19,10 +19,7 @@
         <!-- Hidden settings submenu -->
         <ul id="settingsContainer" class="list-unstyled pb-4 pt-2 px-3 bg-light d-none flex-column">
             <li>
-                <a id="openProfilePopup" class="text-decoration-none border-bottom border-1 text-secondary border-secondary pt-2 pb-1 d-block">Change profile image</a>
-            </li>
-            <li>
-                <a href="#" class="text-decoration-none border-bottom border-1 text-secondary border-secondary pt-2 pb-1 d-block">Edit details</a>
+                <a id="openProfilePopup" style="cursor:pointer" class="text-decoration-none border-bottom border-1 text-secondary border-secondary pt-2 pb-1 d-block">Change profile image</a>
             </li>
             <li>
                 <a href="#" class="text-decoration-none border-bottom border-1 text-secondary border-secondary pt-2 pb-1 d-block">Delete Account</a>
@@ -49,13 +46,14 @@
   <form id="changeImageForm" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="profileImage" class="form-label">Change Profile Image</label>
-      <input type="file" class="form-control" id="profileImage" name="profileImage" accept="image/*" required>
+      <input type="file" class="form-control" id="fileupload" name="fileupload" accept="image/*" required>
     </div>
 
-    <button type="submit" class="btn btn-primary w-100">Upload</button>
+    <button type="submit" class="btn btn-primary w-100"><span class='submit-note'>Upload</span> <span style='display:none;' class='spinner-border text-white'></span></button>
   </form>
+<div class='text-center' id='result'></div>
 </div>
-
+<!-- End of image upload modal -->
 
 
 
@@ -66,6 +64,8 @@
 
 <script>
   $(document).ready(function () {
+
+    // Toggle settings dropdown
     $('#settingsToggleBtn').on('click', function () {
       const container = $('#settingsContainer');
 
@@ -77,42 +77,64 @@
         container.removeClass('d-none').addClass('d-flex').hide().slideDown(200);
       }
     });
-  });
-</script>
 
-<script>
-  $(document).ready(function () {
+    // Open profile popup
     $('#openProfilePopup').on('click', function () {
+      $('#result').html(''); // clear previous messages
       $('.popupProfile').fadeIn();
     });
 
+    // Close profile popup
     $('#closeProfilePopup').on('click', function () {
       $('.popupProfile').fadeOut();
     });
 
+    // Handle image form submission
     $('#changeImageForm').on('submit', function (e) {
       e.preventDefault();
 
-      // You can show a loading indicator here
+      $(".spinner-border").show();
+      $(".submit-note").hide();
+
       let formData = new FormData(this);
 
       $.ajax({
-        url: 'changeProfilePhoto', // update with your backend PHP file
+        url: '../engine/changeProfilePhoto', // Ensure this path is correct
         type: 'POST',
         data: formData,
         contentType: false,
         processData: false,
+        dataType: 'json',
+
         success: function (response) {
-          alert(response.message || 'Image uploaded successfully!');
-          $('.popupProfile').fadeOut();
-          // Optionally refresh profile image
+          $(".spinner-border").hide();
+          $(".submit-note").show();
+
+          if (response.success) {
+            $("#result").html('<div class="alert alert-success">' + response.message + '</div>');
+
+            setTimeout(function () {
+              $('.popupProfile').fadeOut(1000);
+              $("#changeImageForm")[0].reset(); // Reset form
+              // Optionally update profile image on page
+            }, 1000);
+
+          } else {
+            $("#result").html('<div class="alert alert-danger">' + (response.message || 'Upload failed.') + '</div>');
+          }
         },
+
         error: function () {
-          alert('Upload failed. Please try again.');
+          $(".spinner-border").hide();
+          $(".submit-note").show();
+
+          $("#result").html('<div class="alert alert-danger">Server error. Please try again.</div>');
         }
       });
     });
+
   });
 </script>
+
 
 
