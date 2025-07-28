@@ -12,9 +12,8 @@
 <div class="container my-5">
     <div class="contact-section">
         <h2 class="mb-3 text-center text-danger">Contact Us</h2>
-</div>
-  
-     
+    </div>
+
     <div class="container-fluid">
         <div class="contact-container">
             <div class="row g-0 h-100">
@@ -34,40 +33,64 @@
                 <div class="col-lg-7">
                     <div class="form-section h-100">
                         <form id="contactForm" method="POST" action="#" novalidate>
-                            <div class="row">
-                                <!-- First Name -->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="firstName" class="form-label">First name*</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                            <div class="row g-3">
+                                <?php
+                                $fields = [
+                                    [
+                                        "label" => "First name*",  "type" => "text", "id" => "firstName", "name" => "firstName",
+                                        "placeholder" => "Enter your first name", "required" => true, "col" => "col-md-6"
+                                    ],
+                                    [
+                                        "label" => "Last name",  "type" => "text", "id" => "lastName",
+                                        "name" => "lastName", "placeholder" => "Enter your last name", "required" => false, "col" => "col-md-6"
+                                    ],
+                                    [
+                                        "label" => "Email*", "type" => "email",  "id" => "email",
+                                        "name" => "email", "placeholder" => "Enter your email address", "required" => true, "col" => "col-12"
+                                    ],
+
+                                    [
+                                        "label" => "Subject*", "type" => "text",  "id" => "subject",
+                                        "name" => "subject", "placeholder" => "Enter message heading", "required" => true, "col" => "col-12"
+                                    ],
+                                    [
+                                        "label" => "What can we help you with?*",  "type" => "textarea", "id" => "message",
+                                        "name" => "message",  "placeholder" => "Tell us about your inquiry...",  "required" => true,  "col" => "col-12"
+                                    ]
+                                ];
+
+                                foreach ($fields as $field): ?>
+                                    <div class="<?= $field['col'] ?>">
+                                        <div class="form-group">
+                                            <label for="<?= $field['id'] ?>" class="form-label"><?= $field['label'] ?></label>
+                                            <?php if ($field['type'] === 'textarea'): ?>
+                                                <textarea
+                                                    class="form-control"
+                                                    id="<?= $field['id'] ?>"
+                                                    name="<?= $field['name'] ?>"
+                                                    placeholder="<?= $field['placeholder'] ?>"
+                                                    <?= $field['required'] ? 'required' : '' ?>
+                                                ></textarea>
+                                            <?php else: ?>
+                                                <input
+                                                    type="<?= $field['type'] ?>"
+                                                    class="form-control"
+                                                    id="<?= $field['id'] ?>"
+                                                    name="<?= $field['name'] ?>"
+                                                    placeholder="<?= $field['placeholder'] ?>"
+                                                    <?= $field['required'] ? 'required' : '' ?>
+                                                />
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Last Name -->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="lastName" class="form-label">Last name</label>
-                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name">
-                                    </div>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
-                            
-                            <!-- Email -->
-                            <div class="form-group">
-                                <label for="email" class="form-label">Email*</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required>
-                            </div>
-                            
-                            <!-- Message -->
-                            <div class="form-group">
-                                <label for="message" class="form-label">What can we help you with?*</label>
-                                <textarea class="form-control" id="message" name="message" placeholder="Tell us about your inquiry..." required></textarea>
-                            </div>
-                            
+
                             <!-- Submit Button -->
-                            <button type="submit" class="submit-btn">
+                            <button type="submit" class="submit-btn mt-3">
                                 <span class="btn-text">Submit</span>
                             </button>
+                            <div id="responseMessage" class="mt-2"></div>
                         </form>
                         <br>
                     </div>
@@ -76,6 +99,7 @@
         </div>
     </div>
 </div>
-    <?php @include 'components/footer.php' ?>   
+<script src="assets/js/contact.js"></script>
+<?php @include 'components/footer.php' ?>   
 </body>
 </html>

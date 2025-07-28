@@ -16,6 +16,7 @@ class Auth
         return $this->conn;
     }
 
+    // register user module
     public function register(
         string $name, string $email,
         string $password, ?string $vkey='', 
@@ -76,6 +77,7 @@ class Auth
         return $success;
     }
 
+         // log in user module
     public function login(string $email, string $password): bool
     {
         $stmt = $this->conn->prepare("SELECT id, password FROM user_profile WHERE email = ?");
@@ -97,21 +99,31 @@ class Auth
         return false;
     }
 
+     // log out user module
     public function logout(): void
     {
         session_unset();
         session_destroy();
     }
 
+
+
+    // set user module
     public function isLoggedIn(): bool
     {
         return isset($_SESSION['u_id']);
     }
 
+
+
+    // get signed in user module
     public function getUserId(): ?int
     {
         return $_SESSION['u_id'] ?? null;
     }
+
+
+    // forgot password module
 
     public function forgotPassword( 
     string $email,
@@ -140,6 +152,7 @@ class Auth
         }
     }
 
+        // message sending  module
     public function sendMessage(string $sender_email, string $name,
     string $subject, string $compose, string $receiver_email, int $has_read = 0, int $is_receiver_deleted = 0,
     int $is_sender_deleted = 0, string $date = ''
@@ -163,6 +176,26 @@ class Auth
         $stmt->close();
     
         return $result;
+    }
+
+
+    // contact processing module
+    public function contactUs( string $name, 
+    string $subject, 
+    string $email, 
+    string $message, 
+    string $date = '') :bool {   
+         $date = $date ?: date('Y-m-d H:i:s');
+         $contactProcess = $this->conn->prepare("INSERT INTO contact (firstname, lastname, subject, email, message, date)
+         VALUES (?, ?, ?, ?, ?, ?)");
+         $contactProcess->bind_param("ssssss",$firstname, $lastname, $subject, $email, $message, $date);
+         if($contactProcess->execute()){
+           return true;
+         }
+
+         else{
+            return false;
+         }
     }
 
 }
