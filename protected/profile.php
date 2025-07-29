@@ -35,7 +35,6 @@
                 }
                 ?>
             </div>
-            
         </div>
     </div>
 
@@ -53,7 +52,7 @@
             foreach ($fields as $item): ?>
                 <div class='d-flex flex-row flex-column text-secondary mt-3'>
                     <label for="<?= $item['field'] ?>"><?= $item['label'] ?></label>
-                    <span <?= isset($item['id']) ? "id='{$item['id']}'" : '' ?> class='fw-bold text-capitalize' onmouseover="changeBackground(this)" onfocus="changeBackground(this)" onblur="saveData(this, '<?= htmlspecialchars($id) ?>', '<?= $item['field'] ?>')" contenteditable="<?= $item['editable'] ? 'true' : 'false' ?>">
+                    <span <?= isset($item['id']) ? "id='{$item['id']}'" : '' ?> class='fw-bold text-capitalize' onmouseover="changeBackground(this)" onfocus="changeBackground(this)" onblur="saveData(this, '<?= htmlspecialchars($id) ?>', '<?= $item['field'] ?>')" contenteditable='<?= $item['editable'] ? 'true' : 'false' ?>'>
                         <?= htmlspecialchars($item['value']) ?>
                     </span>
                 </div>
@@ -68,11 +67,24 @@
                 ['label' => 'Date of Birth(Y-m-d)', 'field' => 'dob', 'value' => $dob ?? '', 'editable' => true, 'tag' => 'span', 'class' => 'fw-bold']
             ];
             foreach ($infoFields as $item): ?>
-                <div class='d-flex flex-row flex-column text-secondary mt-3'>
-                    <label for=""><?= $item['label'] ?></label>
-                    <<?= $item['tag'] ?> class="<?= $item['class'] ?>" <?= $item['editable'] ? "onmouseover=\"changeBackground(this)\" onfocus=\"changeBackground(this)\" contenteditable='true' onblur=\"saveData(this, '" . htmlspecialchars($id) . "', '{$item['field']}')\"" : '' ?>>
-                        <?= htmlspecialchars($item['value']) ?>
-                    </<?= $item['tag'] ?>>
+                <div class='d-flex flex-column text-secondary mt-3'>
+                    <label><?= $item['label'] ?></label>
+
+                    <?php if ($item['field'] === 'dob'): ?>
+                        <input 
+                          type="date"
+                          class="form-control <?= $item['class'] ?>"
+                          value="<?= htmlspecialchars($item['value']) ?>"
+                          onchange="saveData(this, '<?= htmlspecialchars($id) ?>', '<?= $item['field'] ?>')"
+                        />
+                    <?php else: ?>
+                        <<?= $item['tag'] ?>
+                            class="<?= $item['class'] ?>"
+                            <?= $item['editable'] ? "onmouseover=\"changeBackground(this)\" onfocus=\"changeBackground(this)\" contenteditable='true' onblur=\"saveData(this, '" . htmlspecialchars($id) . "', '{$item['field']}')\"" : '' ?>
+                        >
+                            <?= htmlspecialchars($item['value']) ?>
+                        </<?= $item['tag'] ?>>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -107,7 +119,9 @@
             </div>
             <div class='d-flex flex-row flex-column mt-3 text-secondary'>
                 <label for="">Bio</label>
-                <span class='fw-bold' onmouseover="changeBackground(this)" onfocus="changeBackground(this)" onblur="saveData(this, '<?= htmlspecialchars($id);?>','user_bio');"><?= htmlspecialchars($bio); ?></span>
+                <span class='fw-bold' onmouseover="changeBackground(this)" onfocus="changeBackground(this)" onblur="saveData(this, '<?= htmlspecialchars($id);?>','user_bio');">
+                    <?= htmlspecialchars($bio); ?>
+                </span>
             </div>
         </div>
     </div>

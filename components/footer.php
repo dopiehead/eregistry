@@ -70,3 +70,38 @@ $social_links = [
     </div>
   </div>
 </footer>
+
+<script>
+$(document).ready(function () {
+  $('#subscribe-form').on('submit', function (e) {
+    e.preventDefault();
+
+    const email = $('input[name="email"]').val().trim();
+
+    if (!email) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    $.ajax({
+      url: 'engine/handle-subscription', // your backend endpoint
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ email: email }),
+      success: function (response) {
+        if (response.status === 'success') {
+          swal(response.message);
+          $('#subscribe-form')[0].reset();
+        } else {
+          swal(response.message);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error("Subscription error:", status, error);
+        swal("Something went wrong. Please try again.");
+      }
+    });
+  });
+});
+</script>
+

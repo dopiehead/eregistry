@@ -1,5 +1,5 @@
 <!-- Bootstrap Navbar Section -->
-<nav class="navbar navbar-expand-md bg-white shadow py-3 px-3">
+<nav style='position:fixed;width:100%;top:-5px;z-index:3000' class="navbar navbar-expand-md bg-white shadow py-3 px-3">
   <div class="container-fluid">
     
     <!-- Logo -->

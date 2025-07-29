@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.header {
+    background-color: #dc3545;
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.windchime-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+}
+
+.windchime-logo .logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.windchime-logo .subtitle {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.profile-image {
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.quote-box {
+    background-color: #dc3545;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.motivation-tag {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.personality-bar {
+    background-color: #e9ecef;
+    height: 20px;
+    border-radius: 10px;
+    margin: 5px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.personality-fill {
+    background-color: #dc3545;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.personality-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+.brand-logos {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.brand-logo {
+    height: 30px;
+    opacity: 0.6;
+}
+
+.section-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.bio-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+ul {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+ul li {
+    margin-bottom: 3px;
+}

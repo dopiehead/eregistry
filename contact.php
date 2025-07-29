@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
      <?php @include("components/links.php") ?>
-     <link rel="stylesheet" href="assets/css/about.css">
+     <link rel="stylesheet" href="assets/css/contact.css">
      <title>About</title>
 </head>
 <body>
 <?php @include 'components/navbar.php' ?> 
-<link rel="stylesheet" href="assets/css/contact.css">
+
    
 <div class="container my-5">
     <div class="contact-section">
-        <h2 class="mb-3 text-center text-danger">Contact Us</h2>
+        <h2 class="mb-3 opacity-0 text-center text-danger">Contact Us</h2>
     </div>
 
     <div class="container-fluid">
@@ -89,6 +89,7 @@
                             <!-- Submit Button -->
                             <button type="submit" class="submit-btn mt-3">
                                 <span class="btn-text">Submit</span>
+                                <span style='display:none;' class="spinner-border text-white"></span>
                             </button>
                            
                         </form>

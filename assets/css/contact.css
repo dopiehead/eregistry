@@ -5,7 +5,14 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     overflow: hidden;
     margin: 0 auto;
+    
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@media screen and (max-width:768px){
+    .contact-container {
+        padding:40px 0 200px 0 !important;  
+    }  
 }
 
 .contact-content,
@@ -92,6 +99,7 @@ textarea.form-control {
     position: relative;
     overflow: hidden;
     display: inline-block;
+    
 }
 
 .submit-btn:hover {
