@@ -9,5 +9,7 @@ if (!$auth->isLoggedIn()) {
     exit;
 } else {
     include("contents/userDetails.php");
+    $extension = strtolower(pathinfo($image,PATHINFO_EXTENSION));
+    $image_extension  = array('jpg','jpeg','png'); 
 }
 ?>

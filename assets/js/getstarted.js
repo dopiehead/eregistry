@@ -51,11 +51,34 @@ $(function() {
                     $("#login-password").addClass("border border-2 border-danger");
                 }
             },
-            error: function() {
+            error: function(jqXHR, textStatus, errorThrown) {
                 $(".spinner-border").hide();
                 $(".signin-note").show();
                 $('.btn-custom').prop('disabled', false);
-                $("#error-message").text("Something went wrong. Please try again.");
+            
+                // Display detailed error
+                let errorMsg = "Something went wrong. Please try again.";
+            
+                if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                    errorMsg = jqXHR.responseJSON.message;
+                } else if (jqXHR.responseText) {
+                    errorMsg = "Server Error: " + jqXHR.responseText;
+                } else if (errorThrown) {
+                    errorMsg = "Error Thrown: " + errorThrown;
+                } else if (textStatus) {
+                    errorMsg = "Status: " + textStatus;
+                }
+            
+                // Log full response to console for developer debugging
+                console.error("AJAX Error:", {
+                    status: jqXHR.status,
+                    statusText: jqXHR.statusText,
+                    responseText: jqXHR.responseText,
+                    errorThrown: errorThrown,
+                    textStatus: textStatus
+                });
+            
+                $("#error-message").text(errorMsg);
             }
         });
     });

@@ -4,7 +4,7 @@
     </div>
 
     <nav class="nav flex-column">
-        <a class="nav-link" href="../../index.php"><i class="fas fa-home"></i> Home</a>
+        <a class="nav-link" href="../index.php"><i class="fas fa-home"></i> Home</a>
         <a class="nav-link active" href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         <a class="nav-link" href="profile.php"><i class="fas fa-user-alt"></i> Profile</a>
         <a class="nav-link" href="messages.php"><i class="fas fa-comments"></i> Chats</a>

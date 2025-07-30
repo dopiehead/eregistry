@@ -90,10 +90,18 @@ $(document).ready(function () {
       data: JSON.stringify({ email: email }),
       success: function (response) {
         if (response.status === 'success') {
-          swal(response.message);
+          swal({
+            icon:"success",
+            title:"Success",
+            text:response.message
+          });
           $('#subscribe-form')[0].reset();
         } else {
-          swal(response.message);
+          swal({
+            title:"Notice",
+            icon:"warning",
+            text:response.message
+          });
         }
       },
       error: function (xhr, status, error) {

@@ -7,6 +7,9 @@ $conn = $auth->getConnection();
 $id = isset($_GET['id']) ? filter_input(INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
 $u_id = base64_decode($id);
 
+// ====================== Saved Searched User Info From Redirect ======================
+include ("contents/search-info.php");
+
 // ====================== Load User Info or Redirect ======================
 if($u_id):
   include("contents/user-information.php");
