@@ -8,8 +8,8 @@ header('Content-Type: text/html; charset=utf-8');
 
 $sql = "SELECT * FROM states_in_nigeria";
 
-if (isset($_POST['location'])) {
-    $location = htmlspecialchars($_POST['location'], ENT_QUOTES, 'UTF-8');
+if (isset($_POST['state'])) {
+    $location = htmlspecialchars($_POST['state'], ENT_QUOTES, 'UTF-8');
     $location = mysqli_real_escape_string($con, $location);
     $sql .= " WHERE state = '$location'";
 }

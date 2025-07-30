@@ -77,25 +77,19 @@ $categories = [
                     </div>
 
                     <!-- Category Section -->
-                    <!-- <div class="card mb-4">
+                   <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="section-title">Category</h5>
+                            <h5 class="section-title">Daily Quotes</h5>
                             
                             <div class="mb-3">
-                                <label class="form-label">Product Category</label>
-                                <select class="form-select">
-                                    <option>Health & Medicine</option>
-                                </select>
+                
+                            
+                                    <textarea class="form-select" name="quotes" id="quotes" placeholder="...Write quote"></textarea>
+                              
                             </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Product Category</label>
-                                <select class="form-select">
-                                    <option>Beauty</option>
-                                </select>
-                            </div>
+                           
                         </div>
-                    </div> -->
+                    </div>
 
                     <!-- Inventory Section -->
                     <!-- <div class="card mb-4">
@@ -149,7 +143,7 @@ $categories = [
                     <!-- Action Buttons -->
                     <div class="d-flex gap-2">
                         <button class="btn btn-outline-secondary flex-fill">Discard</button>
-                        <button class="btn btn-outline-primary">Schedule</button>
+                        
                         <button class="btn btn-primary">Add Registry</button>
                     </div>
                 </div>

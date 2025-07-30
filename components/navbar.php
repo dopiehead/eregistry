@@ -33,7 +33,7 @@
 
       <!-- Auth buttons -->
       <div class="d-flex flex-column flex-md-row align-items-center gap-2 text-center">
-        <?php if($_SESSION['uid']): ?>
+        <?php if($_SESSION['u_id']): ?>
         <a class="btn btn-danger rounded-pill px-4 py-1 w-100 w-md-auto" href="protected/profile.php">Get Started</a>
         <?php else : ?>
           <a class="btn btn-danger rounded-pill px-4 py-1 w-100 w-md-auto" href="getstarted.php">Get Started</a>
