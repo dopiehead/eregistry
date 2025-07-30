@@ -70,7 +70,7 @@ endif;
                      $number = 1;
                      $order = " ORDER BY id ASC";
                      ?>
-                <?= json_encode($quotes_daily) ?>
+                <?= json_encode($quotes_daily ?? null)  ?>
                 <?php endif; ?>
             </div>
         </div>
@@ -107,11 +107,11 @@ endif;
                     include("contents/table.php");
                  endif;
 
-                $personalityTraits = [
-                    ['label1' => 'EXTROVERT',  'label2' => 'INTROVERT',  'percent' => $introvert_extrovert],
-                    ['label1' => 'ANALYTICAL', 'label2' => 'CREATIVE',   'percent' => $analytical_creative],
-                    ['label1' => 'LOYAL',      'label2' => 'IMPULSIVE',  'percent' => $loyal_impulsive],
-                    ['label1' => 'PASSIVE',    'label2' => 'ACTIVE',     'percent' => $passive_active],
+                 $personalityTraits = [
+                    ['label1' => 'EXTROVERT',  'label2' => 'INTROVERT',  'percent' => $introvert_extrovert ?? ''],
+                    ['label1' => 'ANALYTICAL', 'label2' => 'CREATIVE',   'percent' => $analytical_creative ?? ''],
+                    ['label1' => 'LOYAL',      'label2' => 'IMPULSIVE',  'percent' => $loyal_impulsive ?? ''],
+                    ['label1' => 'PASSIVE',    'label2' => 'ACTIVE',     'percent' => $passive_active ?? ''],
                 ];
                 ?>
 
