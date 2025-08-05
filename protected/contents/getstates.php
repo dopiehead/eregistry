@@ -1,4 +1,5 @@
 <?php 
+
 require("../engine/connection.php");
 
 $getstates = $con->prepare("SELECT DISTINCT state FROM states_in_nigeria ORDER BY state ASC");

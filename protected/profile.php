@@ -1,4 +1,11 @@
-<?php include("contents/permission.php") ?>
+<?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+include("contents/permission.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +31,7 @@
 
             <div class="row g-3">
                 <div class="col-md-4">
-                    <label for="name">Name</label>
+                    <label class='text-secondary' for="name">Name</label>
                     <input id="name" type="text" class="form-control fw-bold text-capitalize"
                         value="<?= htmlspecialchars($name ?? '') ?>"
                         onfocus="changeBackground(this)"
@@ -32,7 +39,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="password">Password</label>
+                    <label class='text-secondary' for="password">Password</label>
                     <input id="password" type="password" class="form-control fw-bold text-capitalize"
                         value="<?= htmlspecialchars($password ?? '') ?>"
                         onfocus="changeBackground(this)"
@@ -40,13 +47,13 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="family">Marital Status</label>
+                    <label class='text-secondary' for="family">Marital Status</label>
                     <select id="family" name="family" class="form-control fw-bold capitalize"
                         onfocus="changeBackground(this)"
                         onblur="saveData(this, '<?= htmlspecialchars($id) ?>', 'family')">
-                        <option value="single" <?= ($family ?? '') === 'single' ? 'selected' : '' ?>>Single</option>
-                        <option value="married" <?= ($family ?? '') === 'married' ? 'selected' : '' ?>>Married</option>
-                        <option value="divorced" <?= ($family ?? '') === 'divorced' ? 'selected' : '' ?>>Divorced</option>
+                        <option value="single" <?=  htmlspecialchars($family ?? '') === 'single' ? 'selected' : '' ?>>Single</option>
+                        <option value="married" <?=  htmlspecialchars($family ?? '') === 'married' ? 'selected' : '' ?>>Married</option>
+                        <option value="divorced" <?=  htmlspecialchars($family ?? '') === 'divorced' ? 'selected' : '' ?>>Divorced</option>
                     </select>
                 </div>
             </div>
@@ -59,22 +66,33 @@
             </div>
 
             <div class="row g-3">
-                <?php
-                $infoFields = [
-                    ['label' => 'Email address', 'field' => 'email', 'value' => $email ?? '', 'editable' => true],
-                    ['label' => 'Phone number', 'field' => 'phone', 'value' => $phone ?? '', 'editable' => true, 'type' => 'number'],
-                    ['label' => 'Date of Birth (Y-m-d)', 'field' => 'dob', 'value' => $dob ?? '', 'editable' => true, 'type' => 'date']
-                ];
-                foreach ($infoFields as $item): ?>
-                    <div class="col-md-4">
-                        <label><?= $item['label'] ?></label>
-                        <input type="<?= $item['type'] ?? 'text' ?>"
-                            class="form-control fw-bold <?= $item['field'] === 'email' ? 'text-success' : '' ?>"
-                            value="<?= htmlspecialchars($item['value']) ?>"
-                            onfocus="changeBackground(this)"
-                            onblur="saveData(this, '<?= htmlspecialchars($id) ?>', '<?= $item['field'] ?>')" />
-                    </div>
-                <?php endforeach; ?>
+            <div class="col-md-4">
+    <label class="text-secondary">Email address</label>
+    <input type="text"
+        class="form-control fw-bold text-success"
+        value="john.doe@example.com"
+        onfocus="changeBackground(this)"
+        onblur="saveData(this, '1', 'email')" />
+</div>
+
+<div class="col-md-4">
+    <label class="text-secondary">Phone number</label>
+    <input type="number"
+        class="form-control fw-bold"
+        value="08012345678"
+        onfocus="changeBackground(this)"
+        onblur="saveData(this, '1', 'phone')" />
+</div>
+
+<div class="col-md-4">
+    <label class="text-secondary">Date of Birth (Y-m-d)</label>
+    <input type="date"
+        class="form-control fw-bold"
+        value="1990-05-12"
+        onfocus="changeBackground(this)"
+        onblur="saveData(this, '1', 'dob')" />
+</div>
+
             </div>
         </div>
 
@@ -86,7 +104,7 @@
 
             <div class="row g-3">
                 <div class="col-md-3">
-                    <label>Country</label>
+                    <label class='text-secondary'>Country</label>
                     <input type="text" class="form-control fw-bold text-capitalize border-mute" value="Nigeria" disabled />
                 </div>
 
@@ -109,7 +127,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label for="lga" class="form-label">LGA</label>
+                    <label for="lga" class="form-label text-secondary">LGA</label>
                     <select id="lga" class="form-control fw-bold text-capitalize border-mute lga"
                         onfocus="changeBackground(this)"
                         onblur="saveData(this, '<?= htmlspecialchars($id) ?>', 'lga')">
@@ -118,7 +136,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label>Full Address</label>
+                    <label class='text-secondary'>Full Address</label>
                     <input type="text" class="form-control fw-bold text-capitalize border-mute"
                         value="<?= htmlspecialchars($address ?? '') ?>"
                         onfocus="changeBackground(this)"
@@ -133,7 +151,7 @@
                 <h5 class="fw-bold">About</h5>
             </div>
             <div class="form-group">
-                <label>Bio</label>
+                <label class='text-secondary'>Bio</label>
                 <textarea class="form-control fw-bold" rows="4"
                     onfocus="changeBackground(this)"
                     onblur="saveData(this, '<?= htmlspecialchars($id); ?>','bio');"><?= htmlspecialchars($bio); ?></textarea>
@@ -161,6 +179,7 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
+
                 <div class="mt-3">
                     <button name="submit" id="submit" class="btn btn-success shadow">
                         <span class="submit-note">Submit</span>
@@ -169,6 +188,75 @@
                 </div>
             </form>
         </div>
+
+        <div class='border border-1 border-mute shadow-lg bg-white rounded p-3 mb-4'>
+
+          <div class='mt-3'>            
+               <h5 class="fw-bold">Next of Kin</h5>
+          </div>
+
+          <div class='d-flex justify-content-between align-items-center flex-md-row flex-column'>
+          <div class="d-flex flex-row flex-column">
+    <label class="text-secondary" for="next_of_kin_name">Name</label>
+    <input 
+        class="border border-2 border-mute form-control" 
+        type="text" 
+        name="next_of_kin_name" 
+        id="next_of_kin_name"
+    >
+</div>
+
+<div class="d-flex flex-row flex-column">
+    <label class="text-secondary" for="next_of_kin_address">Address</label>
+    <input 
+        class="border border-2 border-mute form-control" 
+        type="text" 
+        name="next_of_kin_address" 
+        id="next_of_kin_address"
+    >
+</div>
+
+<div class="d-flex flex-row flex-column">
+    <label class="text-secondary" for="next_of_kin_telephone">Phone number</label>
+    <input 
+        class="border border-2 border-mute form-control" 
+        type="text" 
+        name="next_of_kin_telephone" 
+        id="next_of_kin_telephone"
+    >
+</div>
+
+<div class="d-flex flex-row flex-column">
+    <label class="text-secondary" for="next_of_kin_relationship">Relationship</label>
+    <input 
+        class="border border-2 border-mute form-control" 
+        type="text" 
+        name="next_of_kin_relationship" 
+        id="next_of_kin_relationship"
+    >
+</div>
+
+<div class="d-flex flex-row flex-column">
+    <label class="text-secondary" for="pin">PIN</label>
+    <input 
+        class="border border-2 border-mute form-control" 
+        type="text" 
+        name="pin" 
+        id="pin"
+        value='<?= htmlspecialchars($pin) ?>'
+    >
+</div>
+            
+          </div>
+
+          <div class='position-relative left-0 translate-start mt-4'>
+
+              <button id='saveNextOfKin' class='btn btn-primary'>Submit</button>
+
+          </div>
+
+        </div>
+
     </div>
 </div>
 

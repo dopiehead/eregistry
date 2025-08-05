@@ -17,29 +17,41 @@
         <?php @include("components/topbar.php") ?>
 
         <div class='px-3' id="label">
-            <?php
-            $limit = 2;
-            $getQuery = "SELECT * FROM messages WHERE receiver_email = '$email' AND is_receiver_deleted = 0 GROUP BY sender_email";
-            $result = mysqli_query($conn, $getQuery);
-            $total_rows = $result->num_rows;
-            $total_pages = ceil($total_rows / $limit);
-            
-            $page_number = $_GET['page'] ?? 1;
-            $initial_page = ($page_number - 1) * $limit;
+         <?php
+             $limit = 2;
+             $page_number = $_GET['page'] ?? 1;
+             $initial_page = ($page_number - 1) * $limit;
 
-            $inbox = "SELECT * FROM (
-                        SELECT * FROM messages 
-                        WHERE receiver_email = '$email' 
-                          AND is_receiver_deleted = 0 
-                        ORDER BY has_read ASC 
-                        LIMIT 18446744073709551615
-                      ) AS sub 
-                      GROUP BY sender_email 
-                      LIMIT $initial_page, $limit";
+             $getQuery = "
+                SELECT MAX(id) as max_id
+                FROM messages
+                WHERE receiver_email = '$email' 
+                AND is_receiver_deleted = 0
+                GROUP BY sender_email
+                ";
+             $result = mysqli_query($conn, $getQuery);
+             $total_rows = mysqli_num_rows($result);
+             $total_pages = ceil($total_rows / $limit);
 
-            $in = mysqli_query($conn, $inbox);
-            $datafound = $in->num_rows;
-            ?>
+             // Now fetch full message rows using JOIN
+             $inbox = "
+                SELECT m.*
+                FROM messages m
+                JOIN (
+                SELECT MAX(id) as max_id
+                FROM messages
+                WHERE receiver_email = '$email'
+                AND is_receiver_deleted = 0
+                GROUP BY sender_email
+                LIMIT $initial_page, $limit
+                 ) AS latest ON m.id = latest.max_id
+                 ORDER BY m.has_read ASC
+             ";
+
+             $in = mysqli_query($conn, $inbox);
+             $datafound = mysqli_num_rows($in);
+         ?>
+
 
             <table style='width:100%'>
                 <thead>

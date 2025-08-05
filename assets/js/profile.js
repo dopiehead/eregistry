@@ -130,9 +130,49 @@ $('.location').on('change', function (e) {
   });
 });
 
-
-
 });
+
+
+$(document).ready(function () {
+    $("#saveNextOfKin").on("click", function (e) {
+        e.preventDefault();
+
+        // Collect form data
+        let data = {
+            next_of_kin_name: $("#next_of_kin_name").val(),
+            next_of_kin_address: $("#next_of_kin_address").val(),
+            next_of_kin_telephone: $("#next_of_kin_telephone").val(),
+            next_of_kin_relationship: $("#next_of_kin_relationship").val()
+        };
+
+        // Send AJAX request
+        $.ajax({
+            url: "../engine/next_of_kin", // Your PHP file
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    $("#message").html(
+                        "<span class='text-success'>Next of kin details saved successfully.</span>"
+                    );
+                } else {
+                    $("#message").html(
+                        "<span class='text-danger'>" + (response.error || "An error occurred") + "</span>"
+                    );
+                }
+            },
+            error: function () {
+                $("#message").html(
+                    "<span class='text-danger'>Unable to save data. Please try again.</span>"
+                );
+            }
+        });
+    });
+});
+
+
 
 
 
