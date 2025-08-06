@@ -73,21 +73,28 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ pin })
-            })
-            .then(res => res.json())
-            .then(json => {
-                if (json.success) {
-                    window.location.href = json.redirect || 'protected/userdashboarddetails.php';
-                } else {
-                    errorEl.textContent = json.error || 'Invalid PIN. Please try again.';
-                    inputs.forEach(i => i.value = '');
-                    inputs[0].focus();
+              })
+              .then(async (res) => {
+                const text = await res.text();
+                let json;
+                try { json = JSON.parse(text); } catch (_) {
+                  throw new Error(`Non-JSON response (HTTP ${res.status}): ${text?.slice(0,200)}`);
                 }
-            })
-            .catch(() => {
-                errorEl.textContent = 'Network error. Please try again.';
-            });
+                if (!res.ok) throw new Error(json.error || `HTTP ${res.status}`);
+                return json;
+              })
+              .then((json) => {
+                if (json.success) {
+                  window.location.href = json.redirect || 'protected/userdashboarddetails.php';
+                } else {
+                  throw new Error(json.error || 'Invalid PIN. Please try again.');
+                }
+              })
+              .catch((err) => {
+                errorEl.textContent = err.message || 'Network error. Please try again.';
+              });
         });
+
     })();
 
     // $(document).on("submit","#pinForm",function (e) {
