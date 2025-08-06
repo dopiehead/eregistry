@@ -37,7 +37,8 @@ class Auth
         ?string $pin = null,
         ?string $vkey = '',
         ?int $verified = 0,
-        string $date_created = ''
+        string $date_created = '',
+        string $updated_at = ''
     ): bool {
         if (empty($email) || empty($password)) {
             return false;
@@ -80,18 +81,18 @@ class Auth
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $pin = $pin ?? str_pad((string) random_int(0, 9999), 4, '0', STR_PAD_LEFT);
         $created = $date_created ?: (new \DateTimeImmutable())->format('Y-m-d H:i:s');
-
+        $updated = $updated_at ?: (new \DateTimeImmutable())->format('Y-m-d H:i:s');
         $stmt = $this->conn->prepare("INSERT INTO user_profile (
             name, email, password, image, state, lga, address,
-            bio, phone, occupation, dob, family, pin, vkey, verified, date_created
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            bio, phone, occupation, dob, family, pin, vkey, verified, date_created, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         if (!$stmt) {
             throw new \RuntimeException("Prepare failed: " . $this->conn->error);
         }
 
         $stmt->bind_param(
-            "ssssssssssssssis",
+            "ssssssssssssssiss",
             $name,
             $email,
             $hashedPassword,
@@ -107,7 +108,8 @@ class Auth
             $pin,
             $vkey,
             $verified,
-            $created
+            $created,
+            $updated
         );
 
         $success = $stmt->execute();

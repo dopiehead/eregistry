@@ -59,60 +59,66 @@
         </div>
 
         <!-- Current Tasks -->
-        <div class="content-section" style="margin-right: 350px;">
-            <div class="section-header">
-                <div>
-                    <h3 class="section-title">Current Contents</h3>
-                    <span style="color: #6b7280; font-size: 14px;">Wedding Registry</span>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        Week
-                    </button>
-                </div>
-            </div>
-            <div class="tasks-section">
-                <div class="task-item">
-                    <div class="task-icon review">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="task-content">
-                        <div class="task-title">Product Review for UIR Market</div>
-                        <span class="task-status in-progress">In progress</span>
-                    </div>
-                    <div class="task-time">4h</div>
-                    <i class="fas fa-ellipsis-h" style="color: #6b7280;"></i>
-                </div>
-                <div class="task-item">
-                    <div class="task-icon research">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="task-content">
-                        <div class="task-title">UX Research for Product</div>
-                        <span class="task-status on-hold">On hold</span>
-                    </div>
-                    <div class="task-time">8h</div>
-                    <i class="fas fa-ellipsis-h" style="color: #6b7280;"></i>
-                </div>
-                <div class="task-item">
-                    <div class="task-icon design">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <div class="task-content">
-                        <div class="task-title">App design and development</div>
-                        <span class="task-status done">Done</span>
-                    </div>
-                    <div class="task-time">32h</div>
-                    <i class="fas fa-ellipsis-h" style="color: #6b7280;"></i>
-                </div>
-            </div>
-        </div>
-    </div>
+        <div class="content-section w-100" style="margin-right: 350px;">
+        
 
+        <div>
+
+        <table class='w-100 border-mute' cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+          
+            <th>Next of Kin Name</th>
+            <th>Address</th>
+            <th>Telephone</th>
+            <th>Relationship</th>
+            <th>PIN</th>
+            <th>Status</th>
+            <th>Expiry Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $conn = $auth->getConnection();
+        $user_id = $auth->getUserId();
+        $getkin = $conn->prepare("SELECT * FROM next_of_kin WHERE email = ?");
+        $getkin->bind_param("s", $email); // "i" for integer
+        if ($getkin->execute()) {
+            $kinResults = $getkin->get_result();
+            while ($dataFound = $kinResults->fetch_assoc()) {
+                ?>
+                <tr>
+                   
+                    <td class='text-secondary'><?= htmlspecialchars($dataFound['next_of_kin_name']) ?></td>
+                    <td class='text-secondary'><?= htmlspecialchars($dataFound['next_of_kin_address']) ?></td>
+                    <td class='text-secondary'><?= htmlspecialchars($dataFound['next_of_kin_telephone']) ?></td>
+                    <td class='text-secondary'><?= htmlspecialchars($dataFound['next_of_kin_relationship']) ?></td>
+                    <td class='text-secondary'><?= htmlspecialchars($dataFound['pin']) ?></td>
+                    <td class='text-secondary'><?= htmlspecialchars($dataFound['status'] ?? 'N/A') ?></td>                    
+                    <td class='text-secondary'><?= htmlspecialchars($dataFound['expiry_date']) ?></td>
+
+                    <td> 
+                        <div class='d-flex justify-content-center gap-2'>
+                             <button class='border border-success text-success rounded rounded-pill'>Activate</button>
+                            <button class='border border-danger text-danger rounded rounded-pill'>Remove</button>
+                        </div>
+                    </td>
+                </tr>
+                <?php
+            }
+        }
+        ?>
+    </tbody>
+</table>
+
+        </div>
+
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-   
 </body>
 </html>
 

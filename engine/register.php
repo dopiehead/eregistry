@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $vkey       = md5(time() . $email);
     $verified   = 0;
     $created    = date('Y-m-d H:i:s');
+    $updated    = date('Y-m-d H:i:s');
 
     // Basic validation
     if (empty($email) || empty($password)) {
@@ -60,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pin,
         $vkey,
         $verified,
-        $created
+        $created,
+        $updated
     );
 
     if ($registered) {

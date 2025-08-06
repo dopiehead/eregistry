@@ -6,4 +6,7 @@
 *.jpg
 *.gif
 
+/vendor/
+
+
 *.sql

@@ -38,6 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'status' => 'success',
             'message' => 'Login successful.'
         ]);
+         
+        $newDateTime = date("Y-m-d H:i:s");
+        $lastLoginTime = $conn->prepare("UPDATE user_profile SET updated_at = ? WHERE email = ?");
+        $lastLoginTime->bind_param("ss", $newDateTime, $email);
+        if($lastLoginTime->execute()){
+           $stopPin = $conn->prepare("UPDATE next_of_kin SET status='active' WHERE email = ? AND expiry_date <= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)");
+           $stopPin->bind_param("i",$email);
+           $stopPin->execute();
+        }
+
         exit;
     } else {
         echo json_encode([
