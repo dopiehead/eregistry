@@ -120,5 +120,50 @@ if ($get_notifications && $get_notifications->bind_param("i", $user_id)) {
   src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js">
 </script>
    <script src="../assets/js/notifications.js"></script>
+   <script>
+    document.addEventListener('click', async function(e) {
+  const btn = e.target.closest('.btn-delete');
+  if (!btn) return;
+
+  const id = btn.getAttribute('data-id');
+ 
+  if (!id) return;
+
+  const card = btn.closest('.col-12, .col-md-6, .col-lg-4') || btn.closest('.card');
+
+  const confirm = await Swal.fire({
+    title: 'Delete notification?',
+    text: 'This action cannot be undone.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete',
+    cancelButtonText: 'Cancel'
+  });
+
+  if (!confirm.isConfirmed) return;
+
+  try {
+    const res = await fetch('../engine/delete-notification', {
+    method: 'POST',
+     headers: {
+       'X-Requested-With': 'XMLHttpRequest',
+       'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: 'id=' + encodeURIComponent(id)
+   });
+    const text = await res.text();
+
+    if (text.trim() === '1') {
+      if (card) card.remove();
+      Swal.fire({ title: 'Deleted', text: 'Notification removed.', icon: 'success', timer: 1200, showConfirmButton: false });
+    } else {
+      Swal.fire({ title: 'Notice', text: text || 'Could not delete notification.', icon: 'info' });
+    }
+  } catch (err) {
+    Swal.fire({ title: 'Error', text: 'Network error. Please try again.', icon: 'error' });
+  }
+});
+
+   </script>
 </body>
 </html> 

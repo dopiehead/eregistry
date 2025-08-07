@@ -70,16 +70,15 @@ include("contents/permission.php");
     <label class="text-secondary">Email address</label>
     <input type="text"
         class="form-control fw-bold text-success"
-        value="john.doe@example.com"
-        onfocus="changeBackground(this)"
-        onblur="saveData(this, '1', 'email')" />
+        value="<?= htmlspecialchars($email) ?>"
+         readonly />
 </div>
 
 <div class="col-md-4">
     <label class="text-secondary">Phone number</label>
     <input type="number"
         class="form-control fw-bold"
-        value="08012345678"
+        value="<?= htmlspecialchars($phone) ?>"
         onfocus="changeBackground(this)"
         onblur="saveData(this, '1', 'phone')" />
 </div>
@@ -88,7 +87,7 @@ include("contents/permission.php");
     <label class="text-secondary">Date of Birth (Y-m-d)</label>
     <input type="date"
         class="form-control fw-bold"
-        value="1990-05-12"
+        placeholder="1990-05-12"
         onfocus="changeBackground(this)"
         onblur="saveData(this, '1', 'dob')" />
 </div>
@@ -164,21 +163,42 @@ include("contents/permission.php");
                 <h5 class="fw-bold">Banking Details</h5>
             </div>
             <form id="bankForm">
-                <div class="row g-3">
-                    <?php
-                    $bank_fields = [
-                        ['label' => 'Bank name', 'field' => 'bank_name', 'value' => $bank_name ?? ''],
-                        ['label' => 'Bank account', 'field' => 'bank_account', 'value' => $bank_account ?? ''],
-                        ['label' => 'Bank balance', 'field' => 'bank_balance', 'value' => $bank_balance ?? '']
-                    ];
-                    foreach ($bank_fields as $bank): ?>
-                        <div class="col-md-4">
-                            <label class="text-secondary"><?= htmlspecialchars($bank['label']) ?></label>
-                            <input type="text" class="form-control border-mute"
-                                value="<?= htmlspecialchars($bank['value']) ?>" />
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+            <div class="row g-3">
+    <?php
+    $bank_fields = [
+        ['label' => 'Bank name', 'field' => 'bank_name', 'value' => $bank_name ?? ''],
+        ['label' => 'Bank account number', 'field' => 'bank_account', 'value' => $bank_account ?? ''],
+        ['label' => 'Bank balance', 'field' => 'bank_balance', 'value' => $bank_balance ?? ''],
+        ['label' => 'Account type', 'field' => 'account_type', 'value' => $account_type ?? ''],
+        ['label' => 'Account details', 'field' => 'account_details', 'value' => $account_details ?? ''],
+    ];
+
+    foreach ($bank_fields as $bank): ?>
+        <div class="col-md-4">
+            <label class="text-secondary" for="<?= htmlspecialchars($bank['field']) ?>">
+                <?= htmlspecialchars($bank['label']) ?>
+            </label>
+
+            <?php if ($bank['field'] !== 'account_details'): ?>
+                <input
+                    type="text"
+                    name="<?= htmlspecialchars($bank['field']) ?>"
+                    id="<?= htmlspecialchars($bank['field']) ?>"
+                    class="form-control border-mute"
+                    value="<?= htmlspecialchars($bank['value']) ?>"
+                />
+            <?php else: ?>
+                <textarea
+                    name="<?= htmlspecialchars($bank['field']) ?> (Optional)"
+                    id="<?= htmlspecialchars($bank['field']) ?>"
+                    class="form-control border-mute"
+                    rows="3"
+                ><?= htmlspecialchars($bank['value']) ?></textarea>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+</div>
+
 
                 <div class="mt-3">
                     <button name="submit" id="submit" class="btn btn-success shadow">
@@ -244,7 +264,7 @@ include("contents/permission.php");
         name="pin" 
         id="pin"
         value='<?= htmlspecialchars($pin) ?>'
-    >
+    readonly >
 </div>
             
           </div>

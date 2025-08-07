@@ -10,13 +10,33 @@
     font-weight: 500;
     transition: all 0.3s ease;
     cursor: pointer;
+    text-align: center;
 }
+
+.category-box a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: rgb(57, 56, 56);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
 .category-box:hover {
     background-color: #dc3545;
-    color: white;
     transform: translateY(-5px);
 }
+
+.category-box:hover a {
+    color: white;
+}
+
 input::placeholder {
     color: #aaa;
 }
+
 

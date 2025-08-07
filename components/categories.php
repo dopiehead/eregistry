@@ -26,7 +26,7 @@
             echo "
             <div class='col-6 col-sm-4 col-md-3 col-lg-2'>
                 <div class='category-box text-center'>
-                    <span>{$category_name}</span>
+                    <a class='text-decoration-none' href='getstarted?detail=post-contents'><span>{$category_name}</span></a>
                 </div>
             </div>";
         }

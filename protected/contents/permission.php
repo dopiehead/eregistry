@@ -12,4 +12,3 @@ if (!$auth->isLoggedIn()) {
     $extension = strtolower(pathinfo($image,PATHINFO_EXTENSION));
     $image_extension  = array('jpg','jpeg','png'); 
 }
-?>

@@ -24,7 +24,7 @@
         <p><span class="highlight">eRegistry</span> is more than a loss-prevention tool—it builds a transparent, trustworthy ecosystem. Secondhand buyers can verify product history. Law enforcement can confirm ownership. Even lost IDs and documents can be verified and reported.</p>
 
         <div class="text-center mt-4">
-            <a href="/register" class="btn btn-primary btn-lg rounded-pill px-4">Start Registering Now</a>
+            <a href="/getstarted" class="btn btn-primary btn-lg rounded-pill px-4">Start Registering Now</a>
         </div>
     </div>
 </div>
