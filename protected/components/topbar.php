@@ -17,15 +17,36 @@
                     <div style="color: #6b7280; font-size: 12px;">@<?= htmlspecialchars($name) ?></div>
                 </div>
                 <div class="dropdown">
-                    <a href='tel:+2347033506332' class="btn" type="button" data-bs-toggle="dropdown">
+                    <a href='tel:+<?= htmlspecialchars($phone ?? null) ?>' class="btn" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-phone"></i>
                     </a>
                 </div>
+                <a class='text-dark' href='notifications.php'>
+<?php
+// Count all notifications for this recipient_id
+$get_notifications = $conn->prepare("
+    SELECT COUNT(*) AS count 
+    FROM user_notifications 
+    WHERE recipient_id = ? AND pending = 0
+");
+if ($get_notifications) {
+    $get_notifications->bind_param("i", $id);
+    $get_notifications->execute();
+    $result = $get_notifications->get_result();
+    $row = $result->fetch_assoc();
+    $countnotifications = (int)$row['count'];
+    $get_notifications->close();
+} else {
+    $countnotifications = 0;
+}
+?>
+
                 <div class="dropdown">
-                    <a class="btn" type="button" data-bs-toggle="dropdown">
-                        <i class="fas fa-bell"></i> (<span class='text-danger'>0</span>)
-                    </a>
+
+                        <i class="fas fa-bell"></i> (<span class='text-danger'><?= htmlspecialchars($countnotifications) ?></span>)
+               
                 </div> 
+                </a>
                 <div class="dropdown">
                     <button class="btn" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-ellipsis-h"></i>

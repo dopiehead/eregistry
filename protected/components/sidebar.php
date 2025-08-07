@@ -28,7 +28,7 @@
     </nav>
 
     <div style="padding: 24px;">
-        <a href="#" style="color: #a0aec0; text-decoration: none; font-size: 14px;"><i class="fas fa-question-circle"></i> Help & Information</a>
+        <a href="../nextOfKinSignIn.php" style="color: #a0aec0; text-decoration: none; font-size: 14px;"> Next of Kin log in <i class="fas fa-arrow-right"></i></a>
         <div style="margin-top: 16px;">
             <a href="../engine/logout.php" style="color: #a0aec0; text-decoration: none; font-size: 14px;"><i class="fas fa-sign-out-alt"></i> Log out</a>
         </div>

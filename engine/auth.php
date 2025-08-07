@@ -154,6 +154,7 @@ class Auth
     public function isLoggedIn(): bool
     {
         return isset($_SESSION['u_id']);
+        
     }
 
     public function getUserId(): ?int
