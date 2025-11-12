@@ -50,7 +50,9 @@ endif;
                 <strong>Age:</strong><?= $auth->yearsAgo($dob) ?? null ?><br>
                 <strong>Occupation:</strong> <?= htmlspecialchars($occupation) ?? null ?><br>
                 <strong>Family:</strong> <?= htmlspecialchars($family) ?? null ?><br>
+                <?php if(isset($_SESSION['u_id'])): ?>
                 <strong>Location:</strong> <?= htmlspecialchars($address).", ".htmlspecialchars($state); ?>
+                <?php endif; ?>
             </div>
 
             <!-- ====================== Profile Image ====================== -->

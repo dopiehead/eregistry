@@ -23,8 +23,10 @@ $(function() {
         $(".signin-note").hide();
         $('.btn-custom').prop('disabled', true);
         const formData = {
+            
         "login-email": $("#login-email").val(),
         "login-password": $("#login-password").val(),
+
           }
         const url = $("#url_details").val().trim();
 

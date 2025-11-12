@@ -217,6 +217,8 @@ class Auth
         return $result;
     }
 
+
+    
     /**
      * Contact us module
      */
@@ -235,6 +237,9 @@ class Auth
 
         return $stmt->execute();
     }
+
+
+
 
     /**
      * Newsletter subscription

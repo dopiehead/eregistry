@@ -19,7 +19,7 @@
         Lorem ipsum dolor sit amet consectetur. Risus sollicitudin non ac massa semper. Accumsan aliquet consectetur eleifend massa vel ultricies libero. Vitae sem volutpat est dignissim.
       </p>
 
-      <a href="#" class="btn btn-danger rounded-pill px-4">Read More</a>
+      <a href="about" class="btn btn-danger rounded-pill px-4">Read More</a>
     </div>
 
   </div>

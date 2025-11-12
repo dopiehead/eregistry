@@ -5,6 +5,8 @@ $('#contactForm').on('submit', function(e) {
     $(".spinner-border").show();
     $(".btn-text").hide();
 
+    // const formData1 = $("#contactForm").serialize();
+
     // Gather form data
     const formData = {
         firstName: $('#firstName').val().trim(),
@@ -13,6 +15,8 @@ $('#contactForm').on('submit', function(e) {
         email: $('#email').val().trim(),
         message: $('#message').val().trim()
     };
+
+
 
     // Basic frontend validation
     if (!formData.firstName || !formData.email || !formData.subject || !formData.message) {

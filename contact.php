@@ -64,9 +64,7 @@
                                         <div class="form-group">
                                             <label for="<?= $field['id'] ?>" class="form-label"><?= $field['label'] ?></label>
                                             <?php if ($field['type'] === 'textarea'): ?>
-                                                <textarea
-                                                    class="form-control"
-                                                    id="<?= $field['id'] ?>"
+                                                <textarea class="form-control" id="<?= $field['id'] ?>"
                                                     name="<?= $field['name'] ?>"
                                                     placeholder="<?= $field['placeholder'] ?>"
                                                     <?= $field['required'] ? 'required' : '' ?>

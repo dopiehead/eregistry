@@ -8,7 +8,7 @@
 
     <!-- Link -->
     <div class="col-12 col-md-6 text-md-end">
-      <a href="#" class="text-decoration-none text-danger fw-semibold link-underline-opacity-0 link-underline-opacity-100-hover">
+      <a href="/categories" class="text-decoration-none text-danger fw-semibold link-underline-opacity-0 link-underline-opacity-100-hover">
         See all
         <i class="bi bi-arrow-right ms-1"></i> <!-- optional: requires Bootstrap Icons -->
       </a>
